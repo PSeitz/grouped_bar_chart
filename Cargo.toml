@@ -1,0 +1,11 @@
+[package]
+name = "grouped_bar_chart"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+plotters = "0.3.4"
+serde_json = { version = "1.0.91", features = ["preserve_order"] }
+svg = "0.13.0"
