@@ -26,10 +26,11 @@ impl Debug for BenchData {
     }
 }
 
-fn load_data() -> BTreeMap<String, Vec<BenchData>> {
+fn load_data(file_name: &str) -> BTreeMap<String, Vec<BenchData>> {
     let mut groups = BTreeMap::new();
     //let mut data = Vec::new();
-    let file = File::open("./data.json").unwrap();
+    //let file = File::open("./data.json").unwrap();
+    let file = File::open(file_name).unwrap();
     for line in BufReader::new(file).lines() {
         let line = line.unwrap();
         let val: serde_json::Value = serde_json::from_str(&line).unwrap();
@@ -65,9 +66,36 @@ fn load_data() -> BTreeMap<String, Vec<BenchData>> {
     groups
 }
 
+use argh::FromArgs;
+
+#[derive(FromArgs)]
+/// Reach new heights.
+struct Arrrrghs {
+    /// the filen name of the criterion benches
+    #[argh(option, short = 'i')]
+    file_name: String,
+
+    /// the file name of the of the graph
+    #[argh(option, short = 'o')]
+    out: String,
+
+    /// the title of the chart
+    #[argh(option, short = 't')]
+    title: Option<String>,
+
+    /// whether or not to show delta between min and max per group
+    #[argh(option, short = 'j', default = "false")]
+    show_delta: bool,
+}
+
 fn main() {
-    let chart_title = std::env::args().skip(1).next().unwrap();
-    let name_to_benches = load_data();
+    let arg: Arrrrghs = argh::from_env();
+
+    let chart_title = arg.title.unwrap_or_default();
+
+    //let file_name = std::env::args().skip(1).next().unwrap();
+    //let chart_title = std::env::args().skip(2).next().unwrap();
+    let name_to_benches = load_data(&arg.file_name);
     let variants = name_to_benches
         .iter()
         .flat_map(|group| group.1.iter())
@@ -111,7 +139,7 @@ fn main() {
         chart_area_to_border_padding: 10.0,
         group_padding: 20.0,
         bar_padding: 3.0,
-        print_delta: true,
+        print_delta: arg.show_delta,
     };
 
     let mut document = element::Group::new();
@@ -119,7 +147,7 @@ fn main() {
 
     let document = render_grouped_bar_chart(&chart_title, document, opt, &groups, variant_to_color);
 
-    svg::save("image.svg", &Document::new().add(document)).unwrap();
+    svg::save(arg.out, &Document::new().add(document)).unwrap();
 }
 
 fn num_bytes_to_name(num_bytes: u32) -> String {
@@ -487,7 +515,7 @@ fn draw_x_scale(
 }
 
 fn load_convert_data() -> Vec<Group> {
-    let name_to_benches = load_data();
+    let name_to_benches = load_data("data.json");
     let variants = name_to_benches
         .iter()
         .flat_map(|group| group.1.iter())

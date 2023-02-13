@@ -5,39 +5,39 @@
 <text direction="rtl" font-size="12" x="75" y="514">
 0
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="444.4501" y2="444.4501"/>
-<line stroke="#999999" x1="80" x2="703" y1="444.4501" y2="444.4501"/>
-<text direction="rtl" font-size="12" x="75" y="448.4501">
+<line stroke="#000000" x1="85" x2="80" y1="440.32294" y2="440.32294"/>
+<line stroke="#999999" x1="80" x2="703" y1="440.32294" y2="440.32294"/>
+<text direction="rtl" font-size="12" x="75" y="444.32294">
 1
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="378.9002" y2="378.9002"/>
-<line stroke="#999999" x1="80" x2="703" y1="378.9002" y2="378.9002"/>
-<text direction="rtl" font-size="12" x="75" y="382.9002">
+<line stroke="#000000" x1="85" x2="80" y1="370.64587" y2="370.64587"/>
+<line stroke="#999999" x1="80" x2="703" y1="370.64587" y2="370.64587"/>
+<text direction="rtl" font-size="12" x="75" y="374.64587">
 2
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="313.35028" y2="313.35028"/>
-<line stroke="#999999" x1="80" x2="703" y1="313.35028" y2="313.35028"/>
-<text direction="rtl" font-size="12" x="75" y="317.35028">
+<line stroke="#000000" x1="85" x2="80" y1="300.9688" y2="300.9688"/>
+<line stroke="#999999" x1="80" x2="703" y1="300.9688" y2="300.9688"/>
+<text direction="rtl" font-size="12" x="75" y="304.9688">
 3
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="247.80038" y2="247.80038"/>
-<line stroke="#999999" x1="80" x2="703" y1="247.80038" y2="247.80038"/>
-<text direction="rtl" font-size="12" x="75" y="251.80038">
+<line stroke="#000000" x1="85" x2="80" y1="231.29175" y2="231.29175"/>
+<line stroke="#999999" x1="80" x2="703" y1="231.29175" y2="231.29175"/>
+<text direction="rtl" font-size="12" x="75" y="235.29175">
 4
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="182.25052" y2="182.25052"/>
-<line stroke="#999999" x1="80" x2="703" y1="182.25052" y2="182.25052"/>
-<text direction="rtl" font-size="12" x="75" y="186.25052">
+<line stroke="#000000" x1="85" x2="80" y1="161.61465" y2="161.61465"/>
+<line stroke="#999999" x1="80" x2="703" y1="161.61465" y2="161.61465"/>
+<text direction="rtl" font-size="12" x="75" y="165.61465">
 5
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="116.70059" y2="116.70059"/>
-<line stroke="#999999" x1="80" x2="703" y1="116.70059" y2="116.70059"/>
-<text direction="rtl" font-size="12" x="75" y="120.70059">
+<line stroke="#000000" x1="85" x2="80" y1="91.93762" y2="91.93762"/>
+<line stroke="#999999" x1="80" x2="703" y1="91.93762" y2="91.93762"/>
+<text direction="rtl" font-size="12" x="75" y="95.93762">
 6
 </text>
-<line stroke="#000000" x1="85" x2="80" y1="51.150696" y2="51.150696"/>
-<line stroke="#999999" x1="80" x2="703" y1="51.150696" y2="51.150696"/>
-<text direction="rtl" font-size="12" x="75" y="55.150696">
+<line stroke="#000000" x1="85" x2="80" y1="22.26056" y2="22.26056"/>
+<line stroke="#999999" x1="80" x2="703" y1="22.26056" y2="22.26056"/>
+<text direction="rtl" font-size="12" x="75" y="26.26056">
 7
 </text>
 <text text-anchor="middle" x="30" y="255">
@@ -45,56 +45,50 @@ Gb/s
 </text>
 <line stroke="#000000" x1="85" x2="85" y1="10" y2="510"/>
 <line stroke="#000000" x1="85" x2="790" y1="510" y2="510"/>
-<rect fill="#A99F96" height="186.48526" width="30" x="90" y="323.51474"/>
-<rect fill="#DDA77B" height="203.18483" width="30" x="123" y="306.8152"/>
+<rect fill="#71677C" height="198.02754" width="30" x="90" y="311.97247"/>
+<rect fill="#A99F96" height="180.13136" width="30" x="123" y="329.86865"/>
+<rect fill="#DDA77B" height="208.62111" width="30" x="156" y="301.3789"/>
 <text text-anchor="middle" x="120" y="530">
 34K Text
 </text>
-<text text-anchor="middle" x="120" y="296.8152">
-+8.95%
-</text>
-<rect fill="#A99F96" height="200.42805" width="30" x="230" y="309.57196"/>
-<rect fill="#DDA77B" height="220.04257" width="30" x="263" y="289.95743"/>
+<rect fill="#71677C" height="207.86409" width="30" x="230" y="302.13593"/>
+<rect fill="#A99F96" height="174.97578" width="30" x="263" y="335.02423"/>
+<rect fill="#DDA77B" height="228.22438" width="30" x="296" y="281.77563"/>
 <text text-anchor="middle" x="260" y="530">
 65K Text
 </text>
-<text text-anchor="middle" x="260" y="279.95743">
-+9.79%
-</text>
-<rect fill="#A99F96" height="436.27054" width="30" x="370" y="73.72946"/>
-<rect fill="#DDA77B" height="500" width="30" x="403" y="10"/>
+<rect fill="#71677C" height="421.7929" width="30" x="370" y="88.20709"/>
+<rect fill="#A99F96" height="377.16943" width="30" x="403" y="132.83057"/>
+<rect fill="#DDA77B" height="500" width="30" x="436" y="10"/>
 <text text-anchor="middle" x="400" y="530">
 66K JSON
 </text>
-<text text-anchor="middle" x="400" y="0">
-+14.61%
-</text>
-<rect fill="#A99F96" height="275.379" width="30" x="510" y="234.621"/>
-<rect fill="#DDA77B" height="306.12918" width="30" x="543" y="203.87082"/>
+<rect fill="#71677C" height="280.32028" width="30" x="510" y="229.67972"/>
+<rect fill="#A99F96" height="261.8376" width="30" x="543" y="248.16241"/>
+<rect fill="#DDA77B" height="294.7968" width="30" x="576" y="215.20319"/>
 <text text-anchor="middle" x="540" y="530">
 725b Text
 </text>
-<text text-anchor="middle" x="540" y="193.87082">
-+11.17%
-</text>
-<rect fill="#A99F96" height="214.44594" width="30" x="650" y="295.55408"/>
-<rect fill="#DDA77B" height="230.4851" width="30" x="683" y="279.5149"/>
+<rect fill="#71677C" height="211.8958" width="30" x="650" y="298.1042"/>
+<rect fill="#A99F96" height="191.12767" width="30" x="683" y="318.8723"/>
+<rect fill="#DDA77B" height="246.95627" width="30" x="716" y="263.04373"/>
 <text text-anchor="middle" x="680" y="530">
 10Mb Dickens
 </text>
-<text text-anchor="middle" x="680" y="269.5149">
-+7.48%
-</text>
 <g transform="translate(600,20)">
-<rect fill="#FFFFFF" height="60" stroke="#121212" width="120"/>
+<rect fill="#FFFFFF" height="80" stroke="#121212" width="120"/>
 <text font-size="12" x="10" y="25">
 lz4_cpp
 </text>
 <rect fill="#DDA77B" height="10" width="20" x="90" y="15"/>
 <text font-size="12" x="10" y="45">
-lz4_flex_rust
+lz4_flex_0.10
 </text>
 <rect fill="#A99F96" height="10" width="20" x="90" y="35"/>
+<text font-size="12" x="10" y="65">
+lz4_flex_0.11
+</text>
+<rect fill="#71677C" height="10" width="20" x="90" y="55"/>
 </g>
 <text font-weight="bold" text-anchor="middle" x="640" y="0">
 Block Decompress
