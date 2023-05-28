@@ -51,6 +51,9 @@ fn load_data(file_name: &str) -> BTreeMap<String, Vec<BenchData>> {
 
         let gbs = num_bytes as f64 / duration_ns;
         //data.push((bench_name, group_name, variant, num_bytes, gbs));
+        if num_bytes == 96274 {
+            continue;
+        }
 
         let blub: &mut Vec<_> = groups.entry(group_name.to_string()).or_default();
 
@@ -103,10 +106,11 @@ fn main() {
         .collect::<BTreeSet<_>>();
 
     let mut colors = vec![
-        "#37123C".to_string(),
-        "#71677C".to_string(),
-        "#A99F96".to_string(),
-        "#DDA77B".to_string(),
+        "#3AB795".to_string(),
+        "#A0E8AF".to_string(),
+        "#86BAA1".to_string(),
+        "#EDEAD0".to_string(),
+        "#FFCF56".to_string(),
     ];
 
     let variant_to_color: BTreeMap<String, String> = variants
@@ -144,6 +148,13 @@ fn main() {
 
     let mut document = element::Group::new();
     document = document.set("font-family", "Roboto-Regular,Roboto, sans-serif");
+    document = document.set("fill", "#FFFFFF");
+    let rect = Rectangle::new()
+        .set("width", "100%")
+        .set("height", "100%")
+        .set("fill", "#333333");
+
+    document = document.add(rect);
 
     let document = render_grouped_bar_chart(&chart_title, document, opt, &groups, variant_to_color);
 
@@ -227,8 +238,8 @@ fn draw_group(
     }
 
     let mut node = svg::node::element::Text::new()
-        .set("text-anchor", "middle")
-        .set("x", group_start_x + bar_width)
+        .set("text-anchor", "left")
+        .set("x", group_start_x)
         .set("y", bar_start + 20.0);
     node.append(svg::node::Text::new(groups.label.to_string()));
     group = group.add(node);
@@ -289,7 +300,7 @@ fn render_grouped_bar_chart(
         .map(|g| g.values_and_color.len())
         .max()
         .unwrap();
-    let bar_width = (group_width / max_num_bars_in_group as f32).min(30.0);
+    let bar_width = (group_width / max_num_bars_in_group as f32).min(20.0);
 
     let mut group_start_x = Vec::new();
     let mut curr_group_x = X_AXIS_SPACE + options.chart_area_to_border_padding;
@@ -324,7 +335,7 @@ fn render_grouped_bar_chart(
         ),
     );
     doc = doc.add(legend_group);
-    doc = doc.set("transform", "translate(0,50)");
+    //doc = doc.set("transform", "translate(0,50)");
 
     // Add Title
     let mut node = svg::node::element::Text::new()
@@ -346,9 +357,17 @@ fn draw_legend(
     options: &GroupBarOptions,
     variant_to_color: &BTreeMap<String, String>,
 ) -> SVGGroup {
+    group = group.set("fill", "#000000");
+
     let legend_padding = 10;
     let lebend_entry_height = 20;
-    let legend_width = 120;
+    let longest_label = variant_to_color
+        .iter()
+        .map(|(label, _)| label.len())
+        .max()
+        .unwrap();
+
+    let legend_width = longest_label * 9;
     let legend_height = legend_padding * 2 + variant_to_color.len() * lebend_entry_height;
     let rect = Rectangle::new()
         .set("width", legend_width)
@@ -579,8 +598,6 @@ fn main2() -> Result<(), Box<dyn std::error::Error>> {
         OUT_FILE_NAME.to_string(),
     )?;
 
-    // To avoid the IO failure being ignored silently, we manually call the present function
-    //root.present().expect("Unable to write result to file, please make sure 'plotters-doc-data' dir exists under current dir");
     println!("Result has been saved to {}", OUT_FILE_NAME);
 
     Ok(())
