@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, BTreeSet, HashSet};
+use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -277,7 +277,6 @@ fn get_percent_difference(min: f32, max: f32) -> String {
     format!("+{:.2}%", percent_difference)
 }
 
-//
 fn render_grouped_bar_chart(
     title: &str,
     mut doc: SVGGroup,
@@ -531,146 +530,4 @@ fn draw_x_scale(
     group = group.add(rect);
 
     group
-}
-
-fn load_convert_data() -> Vec<Group> {
-    let name_to_benches = load_data("data.json");
-    let variants = name_to_benches
-        .iter()
-        .flat_map(|group| group.1.iter())
-        .map(|b| b.variant.to_string())
-        .collect::<HashSet<_>>();
-
-    let mut colors = vec![
-        "#aa4a44".to_string(),
-        "#22aaff".to_string(),
-        "#aaaaff".to_string(),
-    ];
-
-    let variant_to_color: BTreeMap<String, String> = variants
-        .iter()
-        .map(|variant| (variant.to_string(), colors.pop().unwrap().to_string()))
-        .collect();
-
-    let mut groups = vec![];
-
-    for (_name, group) in name_to_benches.iter() {
-        let values_and_color = group
-            .iter()
-            .map(|run| {
-                (
-                    run.gbs as f32,
-                    variant_to_color.get(&run.variant).unwrap().to_string(),
-                )
-            })
-            .collect();
-        let gruppe = Group {
-            label: group[0].num_bytes.to_string(),
-            values_and_color,
-        };
-        groups.push(gruppe);
-    }
-    groups
-}
-
-use plotters::prelude::*;
-const OUT_FILE_NAME: &'static str = "histogram.png";
-fn main2() -> Result<(), Box<dyn std::error::Error>> {
-    let data = load_convert_data();
-    let data1: Vec<f64> = data
-        .iter()
-        .map(|group| group.values_and_color[0].0 as f64)
-        .collect();
-    let data2: Vec<f64> = data
-        .iter()
-        .map(|group| group.values_and_color[1].0 as f64)
-        .collect();
-    //let names: Vec<&str> = data[0].values_and_color.iter(|el| el.1).collect();
-
-    //let data1 = vec![0f64, 1.0, 1.0, 1.0, 4.0, 2.0, 5.0, 7.0, 8.0];
-    //let data2 = vec![0f64, 2.0, 1.0, 1.0, 2.0, 2.0, 5.0, 3.0, 12.0];
-
-    draw_2hist(
-        [data1, data2],
-        ["lz4flex", "lz4 ref"],
-        "cool",
-        ("a", "Gb/s"),
-        OUT_FILE_NAME.to_string(),
-    )?;
-
-    println!("Result has been saved to {}", OUT_FILE_NAME);
-
-    Ok(())
-}
-
-pub fn draw_2hist(
-    datas: [Vec<f64>; 2],
-    datas_name: [&str; 2],
-    title: &str,
-    axes_desc: (&str, &str),
-    path: String,
-) -> Result<(), Box<dyn std::error::Error>> {
-    let n = datas.iter().fold(0f64, |max, l| max.max(l.len() as f64));
-    let max_y = datas.iter().fold(0f64, |max, l| {
-        max.max(l.iter().fold(f64::NAN, |v_max, &v| v.max(v_max)))
-    });
-
-    let root = BitMapBackend::new(&path, (1024, 768)).into_drawing_area();
-    root.fill(&WHITE)?;
-
-    let mut chart = ChartBuilder::on(&root)
-        .caption(title, ("Hack", 44, FontStyle::Bold).into_font())
-        .margin(20)
-        .x_label_area_size(50)
-        .y_label_area_size(60)
-        //.build_cartesian_2d(
-        //[true, false, true, false, true].into_segmented(),
-        //0.0..max_y,
-        //)?
-        .build_cartesian_2d((3..n as u32).into_segmented(), 0.0..max_y)?
-        //.build_cartesian_2d((1..n as u32).into_segmented(), 0.0..max_y)?
-        .set_secondary_coord(0.0..n, 0.0..max_y);
-
-    chart
-        .configure_mesh()
-        .disable_x_mesh()
-        .y_desc(axes_desc.1)
-        .x_desc(axes_desc.0)
-        .axis_desc_style(("Hack", 20))
-        .draw()?;
-
-    // creating histograms
-    let a = datas[0].iter().zip(0..).map(|(y, x)| {
-        plotters::element::Rectangle::new(
-            [(x as f64 + 0.1, *y), (x as f64 + 0.5, 0f64)],
-            Into::<ShapeStyle>::into(&full_palette::BLUEGREY_A700).filled(),
-        )
-    });
-    // creating histograms
-    let b = datas[1].iter().zip(0..).map(|(y, x)| {
-        plotters::element::Rectangle::new(
-            [(x as f64 + 0.5, *y), (x as f64 + 0.9, 0f64)],
-            Into::<ShapeStyle>::into(&full_palette::CYAN_800).filled(),
-        )
-    });
-
-    chart
-        .draw_secondary_series(a)?
-        .label(axes_desc.1)
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &full_palette::BLUE_A700));
-    chart
-        .draw_secondary_series(b)?
-        .label("lelelel")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &full_palette::CYAN_800));
-
-    chart
-        .configure_series_labels()
-        .position(SeriesLabelPosition::UpperRight)
-        .label_font(("Hack", 14).into_font())
-        .background_style(&WHITE)
-        .border_style(&BLACK)
-        .draw()?;
-
-    root.present()?;
-    Ok(())
 }
